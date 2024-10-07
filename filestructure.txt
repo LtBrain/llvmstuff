@@ -1,37 +1,18 @@
 Brightfield/
-│
-├── CMakeLists.txt            # CMake configuration file
-│
-├── src/                      # Source files
-│   ├── main.cpp              # Main entry point for the compiler
-│   ├── Lexer.cpp             # Implementation of the lexer
-│   ├── Lexer.h               # Header for the lexer
-│   ├── Parser.cpp            # Implementation of the parser
-│   ├── Parser.h              # Header for the parser
-│   ├── CodeGenerator.cpp      # Implementation of the code generator
-│   ├── CodeGenerator.h       # Header for the code generator
-│   ├── AST.cpp               # Implementation of the AST nodes (if needed)
-│   ├── AST.h                 # Header for the AST nodes
-│   ├── StandardLibrary.cpp    # Implementation of standard library functions
-│   └── StandardLibrary.h     # Header for standard library functions
-│
-├── include/                  # Header files
-│   ├── Lexer.h               # Lexer header (can also be in src/)
-│   ├── Parser.h              # Parser header (can also be in src/)
-│   ├── CodeGenerator.h        # Code generator header (can also be in src/)
-│   └── AST.h                 # AST header (can also be in src/)
-│
-├── tests/                    # Test files
-│   ├── test.bright           # Example Brightfield source code for testing
-│   └── test_lexer.cpp        # Unit tests for lexer
-│   └── test_parser.cpp       # Unit tests for parser
-│   └── test_codegen.cpp      # Unit tests for code generation
-│
-├── examples/                 # Example Brightfield programs
-│   └── example_program.bright # Example program written in Brightfield
-│
-├── build/                    # Build directory (can be created during the build process)
-│
-└── docs/                     # Documentation files
-    ├── README.md             # Project overview and setup instructions
-    └── USER_GUIDE.md         # User guide for the language
+├── CMakeLists.txt
+├── src/
+│   ├── main.cpp
+│   ├── lexer.l
+│   ├── parser.y
+│   ├── ast.hpp
+│   ├── ast.cpp
+│   ├── codegen.hpp
+│   ├── codegen.cpp
+│   └── utils.hpp
+├── include/
+│   ├── ast.hpp
+│   ├── codegen.hpp
+│   └── utils.hpp
+├── examples/
+│   └── example.bright
+└── build/
