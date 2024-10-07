@@ -1,38 +1,25 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include "Lexer.h"
-#include "Parser.h"
-#include "CodeGenerator.h"
+#include "ast.hpp"
+#include "codegen.hpp"
+#include "parser.hpp"
 
-extern "C" int yylex();
-extern "C" int yyparse();
+extern int yyparse();
+extern ProgramAST *root;
 
-int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: Brightfield <input.bright>" << std::endl;
-        return EXIT_FAILURE;
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        FILE *file = fopen(argv[1], "r");
+        if (!file) {
+            printf("Could not open %s\n", argv[1]);
+            return 1;
+        }
+        yyin = file;
     }
 
-    std::ifstream file(argv[1]);
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    std::string content = buffer.str();
+    root = new ProgramAST();
+    yyparse();
 
-    // Initialize lexer and parser
-    Tokenizer tokenizer(content);
-    Parser parser(tokenizer.tokenize());
-    CodeGenerator codeGen;
+    CodeGenContext context;
+    context.generateCode(*root);
 
-    // Parse the input and generate code
-    parser.parse();
-    codeGen.generateCode();
-
-    // Output the LLVM IR to a file
-    codeGen.outputToFile("output.ll");
-
-    std::cout << "LLVM IR code generated in output.ll." << std::endl;
-
-    return EXIT_SUCCESS;
+    return 0;
 }
